@@ -7,10 +7,10 @@ import main.java.creational.factorymethod.PaymentMethodType;
 public class Main {
 
 	public static void main(String[] args) {
-		makePayment();
+		testFactoryMethod();
 	}
 
-	private static void makePayment() {
+	private static void testFactoryMethod() {
 		PaymentMethod paymentMethod = PaymentMethodFactory
 			.buildPaymentMethod(PaymentMethodType.PAYPAL);
 		paymentMethod.makePayment();
