@@ -47,6 +47,10 @@ public class Card {
 			'}';
 	}
 
+	public static Card.CardBuilder builder(String type, String number) {
+		return new CardBuilder(type, number);
+	}
+
 	public static class CardBuilder {
 
 		private String type;

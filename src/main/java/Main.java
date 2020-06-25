@@ -50,5 +50,9 @@ public class Main {
 		Card card2 = new Card.CardBuilder("AMEX", "9999 9999 9999 9999").build();
 
 		System.out.println(card2);
+
+		Card card3 = Card.builder("MASTERCARD", "1234 5678 9012 3456").build();
+
+		System.out.println(card3);
 	}
 }
