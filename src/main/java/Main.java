@@ -7,6 +7,8 @@ import main.java.creational.builder.Card;
 import main.java.creational.factorymethod.PaymentMethod;
 import main.java.creational.factorymethod.PaymentMethodFactory;
 import main.java.creational.factorymethod.PaymentMethodType;
+import main.java.creational.prototype.PrototypeCard;
+import main.java.creational.prototype.PrototypeFactory;
 
 public class Main {
 
@@ -15,6 +17,7 @@ public class Main {
 		testFactoryMethod();
 		testAbstractFactory();
 		testBuilder();
+		testPrototype();
 	}
 
 	private static void testFactoryMethod() {
@@ -54,5 +57,22 @@ public class Main {
 		Card card3 = Card.builder("MASTERCARD", "1234 5678 9012 3456").build();
 
 		System.out.println(card3);
+	}
+
+	private static void testPrototype() {
+		PrototypeFactory.loadCards();
+
+		try {
+
+			PrototypeCard visa = PrototypeFactory.getInstance(PrototypeFactory.VISA);
+			visa.getType();
+
+			PrototypeCard amex = PrototypeFactory.getInstance(PrototypeFactory.AMEX);
+			amex.getType();
+
+		} catch (CloneNotSupportedException e) {
+			e.printStackTrace();
+		}
+
 	}
 }
