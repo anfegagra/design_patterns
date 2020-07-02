@@ -9,6 +9,7 @@ import main.java.creational.factorymethod.PaymentMethodFactory;
 import main.java.creational.factorymethod.PaymentMethodType;
 import main.java.creational.prototype.PrototypeCard;
 import main.java.creational.prototype.PrototypeFactory;
+import main.java.creational.singleton.Singleton;
 
 public class Main {
 
@@ -18,6 +19,7 @@ public class Main {
 		testAbstractFactory();
 		testBuilder();
 		testPrototype();
+		testSingleton();
 	}
 
 	private static void testFactoryMethod() {
@@ -74,5 +76,11 @@ public class Main {
 			e.printStackTrace();
 		}
 
+	}
+
+	private static void testSingleton() {
+		Singleton singleton = Singleton.getInstance();
+		singleton.setValue("1234-1234-1234-1234");
+		System.out.println(singleton.getValue());
 	}
 }
