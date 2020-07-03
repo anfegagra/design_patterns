@@ -1,5 +1,6 @@
 package main.java;
 
+import main.java.behavioral.chainofresponsibility.LoanCard;
 import main.java.creational.abstractfactory.AbstractFactory;
 import main.java.creational.abstractfactory.CreditCard;
 import main.java.creational.abstractfactory.FactoryProvider;
@@ -20,6 +21,7 @@ public class Main {
 		testBuilder();
 		testPrototype();
 		testSingleton();
+		testChainOfResponsibility();
 	}
 
 	private static void testFactoryMethod() {
@@ -82,5 +84,10 @@ public class Main {
 		Singleton singleton = Singleton.getInstance();
 		singleton.setValue("1234-1234-1234-1234");
 		System.out.println(singleton.getValue());
+	}
+
+	private static void testChainOfResponsibility() {
+		LoanCard loanCard = new LoanCard();
+		loanCard.creditCardRequest(1000);
 	}
 }
