@@ -1,6 +1,9 @@
 package main.java;
 
 import main.java.behavioral.chainofresponsibility.LoanCard;
+import main.java.behavioral.command.CreditCardActivateCommand;
+import main.java.behavioral.command.CreditCardDeactivateCommand;
+import main.java.behavioral.command.CreditCardInvoker;
 import main.java.creational.abstractfactory.AbstractFactory;
 import main.java.creational.abstractfactory.CreditCard;
 import main.java.creational.abstractfactory.FactoryProvider;
@@ -22,6 +25,7 @@ public class Main {
 		testPrototype();
 		testSingleton();
 		testChainOfResponsibility();
+		testCommand();
 	}
 
 	private static void testFactoryMethod() {
@@ -89,5 +93,20 @@ public class Main {
 	private static void testChainOfResponsibility() {
 		LoanCard loanCard = new LoanCard();
 		loanCard.creditCardRequest(1000);
+	}
+
+	private static void testCommand() {
+		main.java.behavioral.command.CreditCard creditCard = new main.java.behavioral.command.CreditCard();
+		main.java.behavioral.command.CreditCard creditCardDeactivate = new main.java.behavioral.command.CreditCard();
+
+		CreditCardInvoker creditCardInvoker = new CreditCardInvoker();
+
+		creditCardInvoker.setCommand(new CreditCardActivateCommand(creditCard));
+		creditCardInvoker.run();
+
+		System.out.println("--------------------------------------------------------------------");
+
+		creditCardInvoker.setCommand(new CreditCardDeactivateCommand(creditCardDeactivate));
+		creditCardInvoker.run();
 	}
 }
