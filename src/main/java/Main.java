@@ -4,6 +4,9 @@ import main.java.behavioral.chainofresponsibility.LoanCard;
 import main.java.behavioral.command.CreditCardActivateCommand;
 import main.java.behavioral.command.CreditCardDeactivateCommand;
 import main.java.behavioral.command.CreditCardInvoker;
+import main.java.behavioral.iterator.CardList;
+import main.java.behavioral.iterator.Iterator;
+import main.java.behavioral.iterator.List;
 import main.java.creational.abstractfactory.AbstractFactory;
 import main.java.creational.abstractfactory.CreditCard;
 import main.java.creational.abstractfactory.FactoryProvider;
@@ -26,6 +29,7 @@ public class Main {
 		testSingleton();
 		testChainOfResponsibility();
 		testCommand();
+		testIterator();
 	}
 
 	private static void testFactoryMethod() {
@@ -108,5 +112,21 @@ public class Main {
 
 		creditCardInvoker.setCommand(new CreditCardDeactivateCommand(creditCardDeactivate));
 		creditCardInvoker.run();
+	}
+
+	private static void testIterator() {
+		main.java.behavioral.iterator.Card[] cards = new main.java.behavioral.iterator.Card[3];
+		cards[0] = new main.java.behavioral.iterator.Card("VISA");
+		cards[1] = new main.java.behavioral.iterator.Card("AMEX");
+		cards[2] = new main.java.behavioral.iterator.Card("MASTERCARD");
+
+		List list = new CardList(cards);
+		Iterator iterator = list.iterator();
+
+		while (iterator.hasNext()) {
+			main.java.behavioral.iterator.Card card = (main.java.behavioral.iterator.Card) iterator
+				.next();
+			System.out.println(card.getType());
+		}
 	}
 }
