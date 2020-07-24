@@ -7,6 +7,9 @@ import main.java.behavioral.command.CreditCardInvoker;
 import main.java.behavioral.iterator.CardList;
 import main.java.behavioral.iterator.Iterator;
 import main.java.behavioral.iterator.List;
+import main.java.behavioral.mediator.ConcreteColleague1;
+import main.java.behavioral.mediator.ConcreteColleague2;
+import main.java.behavioral.mediator.ConcreteMediator;
 import main.java.creational.abstractfactory.AbstractFactory;
 import main.java.creational.abstractfactory.CreditCard;
 import main.java.creational.abstractfactory.FactoryProvider;
@@ -30,6 +33,7 @@ public class Main {
 		testChainOfResponsibility();
 		testCommand();
 		testIterator();
+		testMediator();
 	}
 
 	private static void testFactoryMethod() {
@@ -128,5 +132,18 @@ public class Main {
 				.next();
 			System.out.println(card.getType());
 		}
+	}
+
+	public static void testMediator() {
+		ConcreteMediator mediator = new ConcreteMediator();
+
+		ConcreteColleague1 colleague1 = new ConcreteColleague1(mediator);
+		ConcreteColleague2 colleague2 = new ConcreteColleague2(mediator);
+
+		mediator.setUser1(colleague1);
+		mediator.setUser2(colleague2);
+
+		colleague1.sendMessage("Hi I'm user1");
+		colleague2.sendMessage("Hi I'm user2");
 	}
 }
