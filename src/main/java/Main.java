@@ -10,6 +10,9 @@ import main.java.behavioral.iterator.List;
 import main.java.behavioral.mediator.ConcreteColleague1;
 import main.java.behavioral.mediator.ConcreteColleague2;
 import main.java.behavioral.mediator.ConcreteMediator;
+import main.java.behavioral.memento.Article;
+import main.java.behavioral.memento.ArticleMemento;
+import main.java.behavioral.memento.CareTaker;
 import main.java.creational.abstractfactory.AbstractFactory;
 import main.java.creational.abstractfactory.CreditCard;
 import main.java.creational.abstractfactory.FactoryProvider;
@@ -34,6 +37,7 @@ public class Main {
 		testCommand();
 		testIterator();
 		testMediator();
+		testMemento();
 	}
 
 	private static void testFactoryMethod() {
@@ -58,6 +62,7 @@ public class Main {
 	}
 
 	private static void testBuilder() {
+
 		Card card = new Card.CardBuilder("VISA", "0000 1111 2222 3333")
 			.name("Pipe")
 			.expirationDate(2050)
@@ -76,6 +81,7 @@ public class Main {
 	}
 
 	private static void testPrototype() {
+
 		PrototypeFactory.loadCards();
 
 		try {
@@ -93,17 +99,20 @@ public class Main {
 	}
 
 	private static void testSingleton() {
+
 		Singleton singleton = Singleton.getInstance();
 		singleton.setValue("1234-1234-1234-1234");
 		System.out.println(singleton.getValue());
 	}
 
 	private static void testChainOfResponsibility() {
+
 		LoanCard loanCard = new LoanCard();
 		loanCard.creditCardRequest(1000);
 	}
 
 	private static void testCommand() {
+
 		main.java.behavioral.command.CreditCard creditCard = new main.java.behavioral.command.CreditCard();
 		main.java.behavioral.command.CreditCard creditCardDeactivate = new main.java.behavioral.command.CreditCard();
 
@@ -119,6 +128,7 @@ public class Main {
 	}
 
 	private static void testIterator() {
+
 		main.java.behavioral.iterator.Card[] cards = new main.java.behavioral.iterator.Card[3];
 		cards[0] = new main.java.behavioral.iterator.Card("VISA");
 		cards[1] = new main.java.behavioral.iterator.Card("AMEX");
@@ -135,6 +145,7 @@ public class Main {
 	}
 
 	public static void testMediator() {
+
 		ConcreteMediator mediator = new ConcreteMediator();
 
 		ConcreteColleague1 colleague1 = new ConcreteColleague1(mediator);
@@ -145,5 +156,33 @@ public class Main {
 
 		colleague1.sendMessage("Hi I'm user1");
 		colleague2.sendMessage("Hi I'm user2");
+	}
+
+	private static void testMemento() {
+
+		CareTaker careTaker = new CareTaker();
+
+		Article article = new Article("Pipe", "Memento is a movie of Nolan");
+		System.out.println(article.getContent());
+		careTaker.addMemento(article.createMemento());
+
+		article.setContent(article.getContent() + " performed by Guy Pearce");
+		System.out.println(article.getContent());
+		careTaker.addMemento(article.createMemento());
+
+		article.setContent(article.getContent() + " and Leonardo Dicaprio");
+		System.out.println(article.getContent());
+
+		ArticleMemento memento1 = careTaker.getMemento(0);
+		ArticleMemento memento2 = careTaker.getMemento(1);
+
+		article.restoreMemento(memento1);
+		System.out.println(article.getContent());
+
+		article.restoreMemento(memento2);
+		System.out.println(article.getContent());
+
+		article.setContent(article.getContent() + " from year...");
+
 	}
 }
