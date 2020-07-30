@@ -17,7 +17,7 @@ import main.java.behavioral.observer.Car;
 import main.java.behavioral.observer.MessagePublisher;
 import main.java.behavioral.observer.Pedestrian;
 import main.java.behavioral.observer.TrafficLights;
-import main.java.behavioral.observer.TrafficLights.State;
+import main.java.behavioral.observer.TrafficLights.Status;
 import main.java.creational.abstractfactory.AbstractFactory;
 import main.java.creational.abstractfactory.CreditCard;
 import main.java.creational.abstractfactory.FactoryProvider;
@@ -199,13 +199,13 @@ public class Main {
 		MessagePublisher messagePublisher = new MessagePublisher();
 		messagePublisher.attach(pedestrian);
 		messagePublisher.attach(car);
-		messagePublisher.notifyUpdate(new TrafficLights(State.RED));
+		messagePublisher.notifyUpdate(new TrafficLights(Status.RED));
 
 		try {
 			Thread.sleep(2000);
 		} catch (Exception e) {
 
 		}
-		messagePublisher.notifyUpdate(new TrafficLights(State.GREEN));
+		messagePublisher.notifyUpdate(new TrafficLights(Status.GREEN));
 	}
 }

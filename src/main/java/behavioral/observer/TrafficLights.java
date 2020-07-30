@@ -2,17 +2,17 @@ package main.java.behavioral.observer;
 
 public class TrafficLights {
 
-	private State state;
+	private Status status;
 
-	public TrafficLights(State state) {
-		this.state = state;
+	public TrafficLights(Status status) {
+		this.status = status;
 	}
 
-	public State getState() {
-		return state;
+	public Status getStatus() {
+		return status;
 	}
 
-	public enum State {
+	public enum Status {
 
 		RED,
 		GREEN;
