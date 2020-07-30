@@ -13,6 +13,11 @@ import main.java.behavioral.mediator.ConcreteMediator;
 import main.java.behavioral.memento.Article;
 import main.java.behavioral.memento.ArticleMemento;
 import main.java.behavioral.memento.CareTaker;
+import main.java.behavioral.observer.Car;
+import main.java.behavioral.observer.MessagePublisher;
+import main.java.behavioral.observer.Pedestrian;
+import main.java.behavioral.observer.TrafficLights;
+import main.java.behavioral.observer.TrafficLights.State;
 import main.java.creational.abstractfactory.AbstractFactory;
 import main.java.creational.abstractfactory.CreditCard;
 import main.java.creational.abstractfactory.FactoryProvider;
@@ -38,6 +43,7 @@ public class Main {
 		testIterator();
 		testMediator();
 		testMemento();
+		testObserver();
 	}
 
 	private static void testFactoryMethod() {
@@ -183,6 +189,23 @@ public class Main {
 		System.out.println(article.getContent());
 
 		article.setContent(article.getContent() + " from year...");
+	}
 
+	private static void testObserver() {
+
+		Pedestrian pedestrian = new Pedestrian();
+		Car car = new Car();
+
+		MessagePublisher messagePublisher = new MessagePublisher();
+		messagePublisher.attach(pedestrian);
+		messagePublisher.attach(car);
+		messagePublisher.notifyUpdate(new TrafficLights(State.RED));
+
+		try {
+			Thread.sleep(2000);
+		} catch (Exception e) {
+
+		}
+		messagePublisher.notifyUpdate(new TrafficLights(State.GREEN));
 	}
 }
