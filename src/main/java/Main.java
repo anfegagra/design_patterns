@@ -18,6 +18,9 @@ import main.java.behavioral.observer.MessagePublisher;
 import main.java.behavioral.observer.Pedestrian;
 import main.java.behavioral.observer.TrafficLights;
 import main.java.behavioral.observer.TrafficLights.Status;
+import main.java.behavioral.state.MobileAlertStateContext;
+import main.java.behavioral.state.Silent;
+import main.java.behavioral.state.Vibration;
 import main.java.creational.abstractfactory.AbstractFactory;
 import main.java.creational.abstractfactory.CreditCard;
 import main.java.creational.abstractfactory.FactoryProvider;
@@ -44,6 +47,7 @@ public class Main {
 		testMediator();
 		testMemento();
 		testObserver();
+		testState();
 	}
 
 	private static void testFactoryMethod() {
@@ -207,5 +211,18 @@ public class Main {
 
 		}
 		messagePublisher.notifyUpdate(new TrafficLights(Status.GREEN));
+	}
+
+	private static void testState() {
+
+		MobileAlertStateContext mobileAlertStateContext = new MobileAlertStateContext();
+		mobileAlertStateContext.alert();
+		mobileAlertStateContext.alert();
+		mobileAlertStateContext.setState(new Vibration());
+		mobileAlertStateContext.alert();
+		mobileAlertStateContext.alert();
+		mobileAlertStateContext.setState(new Silent());
+		mobileAlertStateContext.alert();
+		mobileAlertStateContext.alert();
 	}
 }
