@@ -4,6 +4,10 @@ import main.java.behavioral.chainofresponsibility.LoanCard;
 import main.java.behavioral.command.CreditCardActivateCommand;
 import main.java.behavioral.command.CreditCardDeactivateCommand;
 import main.java.behavioral.command.CreditCardInvoker;
+import main.java.behavioral.interpreter.AndExpression;
+import main.java.behavioral.interpreter.Expression;
+import main.java.behavioral.interpreter.OrExpression;
+import main.java.behavioral.interpreter.TerminalExpression;
 import main.java.behavioral.iterator.CardList;
 import main.java.behavioral.iterator.Iterator;
 import main.java.behavioral.iterator.List;
@@ -48,6 +52,7 @@ public class Main {
 		testMemento();
 		testObserver();
 		testState();
+		testInterpreter();
 	}
 
 	private static void testFactoryMethod() {
@@ -224,5 +229,19 @@ public class Main {
 		mobileAlertStateContext.setState(new Silent());
 		mobileAlertStateContext.alert();
 		mobileAlertStateContext.alert();
+	}
+
+	private static void testInterpreter() {
+
+		Expression zero = new TerminalExpression("0");
+		Expression one = new TerminalExpression("1");
+
+		Expression containsZeroOrOne = new OrExpression(zero, one);
+		Expression containsZeroAndOne = new AndExpression(zero, one);
+
+		System.out.println(containsZeroOrOne.interpret("zero"));
+		System.out.println(containsZeroOrOne.interpret("0"));
+		System.out.println(containsZeroAndOne.interpret("one"));
+		System.out.println(containsZeroAndOne.interpret("0, 1"));
 	}
 }
