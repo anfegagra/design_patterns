@@ -25,6 +25,9 @@ import main.java.behavioral.observer.TrafficLights.Status;
 import main.java.behavioral.state.MobileAlertStateContext;
 import main.java.behavioral.state.Silent;
 import main.java.behavioral.state.Vibration;
+import main.java.behavioral.strategy.CapitalStrategyTextFormatter;
+import main.java.behavioral.strategy.Context;
+import main.java.behavioral.strategy.LowerStrategyTextFormatter;
 import main.java.creational.abstractfactory.AbstractFactory;
 import main.java.creational.abstractfactory.CreditCard;
 import main.java.creational.abstractfactory.FactoryProvider;
@@ -53,6 +56,7 @@ public class Main {
 		testObserver();
 		testState();
 		testInterpreter();
+		testStrategy();
 	}
 
 	private static void testFactoryMethod() {
@@ -243,5 +247,14 @@ public class Main {
 		System.out.println(containsZeroOrOne.interpret("0"));
 		System.out.println(containsZeroAndOne.interpret("one"));
 		System.out.println(containsZeroAndOne.interpret("0, 1"));
+	}
+
+	public static void testStrategy() {
+
+		Context context = new Context(new LowerStrategyTextFormatter());
+		context.publishText("TEXT TO BE CONVERTED TO LOWER CASE");
+
+		context = new Context(new CapitalStrategyTextFormatter());
+		context.publishText("text to be converted to upper case");
 	}
 }
