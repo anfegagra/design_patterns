@@ -28,6 +28,9 @@ import main.java.behavioral.state.Vibration;
 import main.java.behavioral.strategy.CapitalStrategyTextFormatter;
 import main.java.behavioral.strategy.Context;
 import main.java.behavioral.strategy.LowerStrategyTextFormatter;
+import main.java.behavioral.templatemethod.Amex;
+import main.java.behavioral.templatemethod.Payment;
+import main.java.behavioral.templatemethod.Visa;
 import main.java.creational.abstractfactory.AbstractFactory;
 import main.java.creational.abstractfactory.CreditCard;
 import main.java.creational.abstractfactory.FactoryProvider;
@@ -57,6 +60,7 @@ public class Main {
 		testState();
 		testInterpreter();
 		testStrategy();
+		testTemplateMethod();
 	}
 
 	private static void testFactoryMethod() {
@@ -256,5 +260,14 @@ public class Main {
 
 		context = new Context(new CapitalStrategyTextFormatter());
 		context.publishText("text to be converted to upper case");
+	}
+
+	public static void testTemplateMethod() {
+
+		Payment payment = new Visa();
+		payment.makePayment();
+
+		payment = new Amex();
+		payment.makePayment();
 	}
 }
